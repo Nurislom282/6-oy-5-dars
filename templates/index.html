@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.1.0/mdb.min.css"
+  rel="stylesheet"
+/>
+</head>
+<body>
+
+<div class="container">
+<!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary mb-5">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Toggle button -->
+    <button
+      data-mdb-collapse-init
+      class="navbar-toggler"
+      type="button"
+      data-mdb-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div style="gap: 125px;" class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Navbar brand -->
+      <a class="navbar-brand" href="{%url 'home'%}">
+        <img style="padding-left: 50px;"
+          src="{% static 'images/logo2.jpg' %}"
+          height="100"
+          width="150"
+          alt="Logo"
+          loading="lazy"
+        />
+      </a>
+      <!-- Left links -->
+        <div>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item fw-bold">
+          <a class="nav-link" href="{% url 'home'%}">ASOSY</a>
+        </li>
+        <li class="nav-item fw-bold">
+          <a class="nav-link" href="{%url 'models'%}">BIZNING DILLERLA</a>
+        </li>
+        <li class="nav-item fw-bold">
+          <a class="nav-link" href="{% url 'car' %}">CONTACT US</a>
+        </li>
+      </ul>
+        </div>
+        <div style="margin-left:135px;" align="center" class="mt-2 mb-3">
+        {% for model in models %}
+            <img src="{{ model.model_logo.url }}" alt="logo"
+                 width="70px"
+                 style="padding-left:20px;cursor: pointer;">
+        {% endfor %}
+        </div>
+
+      <!-- Left links -->
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+
+<!-- Button-->
+<!-- Button-->
+
+<!-- Card -->
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for car in cars %}
+  <div class="col">
+    <div class="card">
+      <img src="{{ car.photo.url }}" class="card-img-top" alt="Hollywood Sign on The Hill"/>
+      <div class="card-body">
+          <a href="{% url 'car'%}">
+        <h5 class="card-title">{{ car.car_name }}</h5>
+          </a>
+        <p class="card-text">
+            {{ car.car_bio|truncatewords:15 }}
+        </p>
+      </div>
+        <div class="card-footer d-flex justify-content-between">
+            <small class="text-muted">Yaratilgan vaqt: {{ car.created_at }}</small>
+            <small class="text-muted">BREND: {{ car.model }}</small>
+        </div>
+    </div>
+  </div>
+        {% endfor %}
+</div>
+<!-- Card -->
+</div>
+
+
+
+<!-- MDB -->
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/8.1.0/mdb.umd.min.js"
+></script>
+
+<script src="{% static 'js/script.js'%}"></script>
+</body>
+</html>
